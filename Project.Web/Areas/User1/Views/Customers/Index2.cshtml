@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Index2";
 }
+<br />
+<br />
 
 <h1>Index</h1>
 
@@ -39,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <img class="card-img-top" src="@item.ImgUrl" style="width:12rem;height:14rem;">
+                    <img class="card-img-top" src="@item.ImgUrl" style="width:12rem;height:14rem;">
             </td>
             <td>
 @*                <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |*@
@@ -50,7 +52,12 @@
 }
     </tbody>
 </table>
-
+<br />
 <div class="btn btn-dark">
-      <a asp-area="Users" asp-controller="StartupInfoes" asp-action="Index2">Proceed</a>
+    <a asp-area="User1" asp-controller="StartupInfoes" asp-action="Index2">Proceed</a>
 </div>
+<br />
+
+
+
+

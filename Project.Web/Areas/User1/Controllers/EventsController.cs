@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Project.Web.Data;
 using Project.Web.Models;
 
-namespace Project.Web.Areas.User.Controllers
+namespace Project.Web.Areas.User1.Controllers
 {
-    [Area("User")]
+    [Area("User1")]
     public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;

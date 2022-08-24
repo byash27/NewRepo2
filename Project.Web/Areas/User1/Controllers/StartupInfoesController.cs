@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Project.Web.Data;
 using Project.Web.Models;
 
-namespace Project.Web.Areas.User.Controllers
+namespace Project.Web.Areas.User1.Controllers
 {
-    [Area("User")]
+    [Area("User1")]
     public class StartupInfoesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -61,7 +61,7 @@ namespace Project.Web.Areas.User.Controllers
         public IActionResult Create()
         {
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerName");
-            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventDescription");
+            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventName");
             ViewData["Id"] = new SelectList(_context.SubCategories, "Id", "SubCategories");
             return View();
         }
@@ -80,7 +80,7 @@ namespace Project.Web.Areas.User.Controllers
                 return RedirectToAction(nameof(Index2));
             }
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerName", startupInfo.CustomerId);
-            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventDescription", startupInfo.EventId);
+            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventName", startupInfo.EventId);
             ViewData["Id"] = new SelectList(_context.SubCategories, "Id", "SubCategories", startupInfo.Id);
             return View(startupInfo);
         }

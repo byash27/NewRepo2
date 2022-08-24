@@ -3,58 +3,96 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Project.Web</title>
+    <title>@ViewData["Title"] - FinalP.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Startup India</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!--[if lt IE 9]>
+       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Project.Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Manage</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item"
-                                   asp-area="User" asp-controller="Categories" asp-action="Index">Categories</a>
-                                <a class="dropdown-item"
-                                   asp-area="User" asp-controller="SubCategories" asp-action="Index">SubCategories</a>
-                                <a class="dropdown-item"
-                                   asp-area="User" asp-controller="Customers" asp-action="Index">Customers</a>
-                                <a class="dropdown-item"
-                                   asp-area="User" asp-controller="StartupInfoes" asp-action="Index">StartupInfoes</a>
-                            </div>
-                        </li>
+      <div class="header_bo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-7">
+                            <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarsExample04">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item active">
+                                        <a class="nav-link text-white" asp-area="" asp-page="/Index">Home</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Manage</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                               asp-area="User1" asp-controller="Categories" asp-action="Index">Categories</a>
+                                            <a class="dropdown-item"
+                                               asp-area="User1" asp-controller="SubCategories" asp-action="Index">SubCategories</a>
+                                            <a class="dropdown-item"
+                                               asp-area="User1" asp-controller="Customers" asp-action="Index">Customers</a>
+                                            <a class="dropdown-item"
+                                               asp-area="User1" asp-controller="StartupInfoes" asp-action="Index">StartupInfoes</a>
+                                            <a class="dropdown-item"
+                                               asp-area="User1" asp-controller="Events" asp-action="Index">Events</a>
+                                        </div>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">User </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                               asp-area="User1" asp-controller="Customers" asp-action="Index2">Customers</a>
+                                            <a class="dropdown-item"
+                                               asp-area="User1" asp-controller="StartupInfoes" asp-action="Index2">StartupInfoes</a>
+                                        </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="team.html">team </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="client.html">Clients</a>
+                                        </li>
 
+                                    </ul>
+                                @* Inserting the Login Partial View *@
+                               <partial name="_LoginPartial" />
+                                </div>
 
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">User </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item"
-                                   asp-area="User" asp-controller="Customers" asp-action="Index2">Customers</a>
-                                <a class="dropdown-item"
-                                   asp-area="User" asp-controller="StartupInfoes" asp-action="Index2">StartupInfoes</a>
-                            </div>
-                        </li>
-                    </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
-                @* Inserting the Login Partial View *@
-                <partial name="_LoginPartial" />
-            </div>
-        </nav>
+                </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -62,13 +100,13 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+@*    <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - Project.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2022 - FinalP.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>*@
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 

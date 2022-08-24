@@ -8,26 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using Project.Web.Data;
 using Project.Web.Models;
 
-namespace Project.Web.Areas.User.Controllers
+namespace Project.Web.Areas.User1.Controllers
 {
-    [Area("User")]
-    public class SubCategoriesController : Controller
+    [Area("User1")]
+    public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SubCategoriesController(ApplicationDbContext context)
+        public CategoriesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: User/SubCategories
+        // GET: User/Categories
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.SubCategories.Include(s => s.Category);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Categories.ToListAsync());
         }
 
-        // GET: User/SubCategories/Details/5
+        // GET: User/Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,42 +34,39 @@ namespace Project.Web.Areas.User.Controllers
                 return NotFound();
             }
 
-            var subCategory = await _context.SubCategories
-                .Include(s => s.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (subCategory == null)
+            var category = await _context.Categories
+                .FirstOrDefaultAsync(m => m.CatgoryId == id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(subCategory);
+            return View(category);
         }
 
-        // GET: User/SubCategories/Create
+        // GET: User/Categories/Create
         public IActionResult Create()
         {
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CatgoryId", "Categories");
             return View();
         }
 
-        // POST: User/SubCategories/Create
+        // POST: User/Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategories,CategoryID")] SubCategory subCategory)
+        public async Task<IActionResult> Create([Bind("CatgoryId,Categories,CategoryDescription")] Category category)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(subCategory);
+                _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CatgoryId", "Categories", subCategory.CategoryID);
-            return View(subCategory);
+            return View(category);
         }
 
-        // GET: User/SubCategories/Edit/5
+        // GET: User/Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,23 +74,22 @@ namespace Project.Web.Areas.User.Controllers
                 return NotFound();
             }
 
-            var subCategory = await _context.SubCategories.FindAsync(id);
-            if (subCategory == null)
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CatgoryId", "Categories", subCategory.CategoryID);
-            return View(subCategory);
+            return View(category);
         }
 
-        // POST: User/SubCategories/Edit/5
+        // POST: User/Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategories,CategoryID")] SubCategory subCategory)
+        public async Task<IActionResult> Edit(int id, [Bind("CatgoryId,Categories,CategoryDescription")] Category category)
         {
-            if (id != subCategory.Id)
+            if (id != category.CatgoryId)
             {
                 return NotFound();
             }
@@ -103,12 +98,12 @@ namespace Project.Web.Areas.User.Controllers
             {
                 try
                 {
-                    _context.Update(subCategory);
+                    _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubCategoryExists(subCategory.Id))
+                    if (!CategoryExists(category.CatgoryId))
                     {
                         return NotFound();
                     }
@@ -119,11 +114,10 @@ namespace Project.Web.Areas.User.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CatgoryId", "Categories", subCategory.CategoryID);
-            return View(subCategory);
+            return View(category);
         }
 
-        // GET: User/SubCategories/Delete/5
+        // GET: User/Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,31 +125,30 @@ namespace Project.Web.Areas.User.Controllers
                 return NotFound();
             }
 
-            var subCategory = await _context.SubCategories
-                .Include(s => s.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (subCategory == null)
+            var category = await _context.Categories
+                .FirstOrDefaultAsync(m => m.CatgoryId == id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(subCategory);
+            return View(category);
         }
 
-        // POST: User/SubCategories/Delete/5
+        // POST: User/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subCategory = await _context.SubCategories.FindAsync(id);
-            _context.SubCategories.Remove(subCategory);
+            var category = await _context.Categories.FindAsync(id);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SubCategoryExists(int id)
+        private bool CategoryExists(int id)
         {
-            return _context.SubCategories.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.CatgoryId == id);
         }
     }
 }
