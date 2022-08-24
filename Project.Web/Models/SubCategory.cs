@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using System.Text.Json.Serialization;
 
 namespace Project.Web.Models
 {
@@ -25,14 +26,14 @@ namespace Project.Web.Models
 
         #region 
 
-
+        [JsonIgnore]
         [Display(Name = "Category ID")]
         public int CategoryID { get; set; }
         [ForeignKey(nameof(SubCategory.CategoryID))]
         public Category Category { get; set; }
 
         #endregion
-
+        [JsonIgnore]
         public ICollection<StartupInfo> StartupInfo { get; set; }
 
 

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using System;
+using System.Text.Json.Serialization;
 
 namespace Project.Web.Models
 {
@@ -32,7 +33,7 @@ namespace Project.Web.Models
         public DateTime Date { get; set; } = DateTime.Now;
 
 
-
+        [JsonIgnore]
         [Display(Name = "Sub Category")]
         public int Id { get; set; }
         [ForeignKey(nameof(StartupInfo.Id))]
