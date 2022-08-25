@@ -42,8 +42,9 @@ namespace Project.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Display(Name ="UserName")]    // for username
             [Required]
-            [EmailAddress]
+            
             public string Email { get; set; }
 
             [Required]

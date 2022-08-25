@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Project.Web.Models;
 namespace Project.Web.Areas.User1.Controllers
 {
     [Area("User1")]
+    [Authorize]
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -68,7 +70,8 @@ namespace Project.Web.Areas.User1.Controllers
             {
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index2));
+                //return RedirectToAction(nameof(Index2));
+                return RedirectToAction("Details", new { id = customer.CustomerId });
             }
             return View(customer);
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Project.Web.Data;
 using Project.Web.Models;
 
@@ -15,32 +16,65 @@ namespace Project.Web.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<CategoriesController> _logger;  // changes
 
-        public CategoriesController(ApplicationDbContext context)
+
+        public CategoriesController(
+                    ApplicationDbContext context,
+                    ILogger<CategoriesController> logger)    //block changed
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<IActionResult> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
-        }
-
-        // GET: api/Categories/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
-        {
-            var category = await _context.Categories.FindAsync(id);
-
-            if (category == null)
+            try
             {
-                return NotFound();
+                var pc = await _context.Categories.ToListAsync(); // pc =  product categories
+                if (pc == null)
+                {
+                    _logger.LogWarning("No Categories were found");
+                    return NotFound();
+                }
+                _logger.LogInformation("Extracted all the categories");
+                return Ok(pc);
+            }
+            catch
+            {
+                _logger.LogError("Attempt made to retrieve information");
+                return BadRequest();
+            }
+        }
+        //public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        //{
+        //    return await _context.Categories.ToListAsync();
+        //}
+
+        // GET: api/Categories/5                    // Third test here (block changed)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetCategory(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var category = await _context.Categories.FindAsync(id);
+                if (category == null) { return NotFound(); }
+                return Ok(category);
+            }
+            catch
+            {
+                return BadRequest();
             }
 
-            return category;
+
         }
+
 
         // PUT: api/Categories/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -86,20 +120,32 @@ namespace Project.Web.Controllers
             return CreatedAtAction("GetCategory", new { id = category.CatgoryId }, category);
         }
 
-        // DELETE: api/Categories/5
+        // DELETE: api/Categories/5                 // Changes for delete test
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Category>> DeleteCategory(int id)
+        public async Task<ActionResult> DeleteCategory(int? id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            if (!id.HasValue)
             {
-                return NotFound();
+                return BadRequest();
+            }
+            try
+            {
+                var issueCategory = await _context.Categories.FindAsync(id);
+                if (issueCategory == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Categories.Remove(issueCategory);
+                await _context.SaveChangesAsync();
+
+                return Ok(issueCategory);
+            }
+            catch
+            {
+                return BadRequest();
             }
 
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-
-            return category;
         }
 
         private bool CategoryExists(int id)

@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<br />
+<br />
 <h1>Index</h1>
 
 <p>
@@ -52,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.Customer.CustomerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Event.EventDescription)
+                @Html.DisplayFor(modelItem => item.Event.EventName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.StartupId">Edit</a> |

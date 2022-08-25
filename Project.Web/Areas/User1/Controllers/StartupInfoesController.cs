@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Project.Web.Models;
 namespace Project.Web.Areas.User1.Controllers
 {
     [Area("User1")]
+   
     public class StartupInfoesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -38,7 +40,7 @@ namespace Project.Web.Areas.User1.Controllers
 
             // GET: User/StartupInfoes/Details/5
             public async Task<IActionResult> Details(int? id)
-        {
+            {
             if (id == null)
             {
                 return NotFound();
@@ -77,7 +79,8 @@ namespace Project.Web.Areas.User1.Controllers
             {
                 _context.Add(startupInfo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index2));
+                //return RedirectToAction(nameof(Index2));
+                return RedirectToAction("Details", new { id = startupInfo.CustomerId });
             }
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerName", startupInfo.CustomerId);
             ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventName", startupInfo.EventId);
@@ -99,7 +102,7 @@ namespace Project.Web.Areas.User1.Controllers
                 return NotFound();
             }
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerName", startupInfo.CustomerId);
-            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventDescription", startupInfo.EventId);
+            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventName", startupInfo.EventId);
             ViewData["Id"] = new SelectList(_context.SubCategories, "Id", "SubCategories", startupInfo.Id);
             return View(startupInfo);
         }
@@ -137,7 +140,7 @@ namespace Project.Web.Areas.User1.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerName", startupInfo.CustomerId);
-            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventDescription", startupInfo.EventId);
+            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventName", startupInfo.EventId);
             ViewData["Id"] = new SelectList(_context.SubCategories, "Id", "SubCategories", startupInfo.Id);
             return View(startupInfo);
         }
