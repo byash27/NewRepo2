@@ -54,6 +54,7 @@ namespace Project.Web.Areas.User1.Controllers
         }
 
         // GET: User/Customers/Create
+        
         public IActionResult Create()
         {
             return View();

@@ -80,7 +80,7 @@ namespace Project.Web.Areas.User1.Controllers
                 _context.Add(startupInfo);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index2));
-                return RedirectToAction("Details", new { id = startupInfo.CustomerId });
+                return RedirectToAction("Details", new { id = startupInfo.StartupId }); // for redirection
             }
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerName", startupInfo.CustomerId);
             ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventName", startupInfo.EventId);
